@@ -1,0 +1,186 @@
+<html>
+<head>
+	<!--
+	Hello Dear , I am Nishant Vaity Welcomes you !
+	As you are here & reading this text means may be you are developer.
+	You are allowed to edit this file & redistribute it further, Enjoy !!!
+
+	You are welcome here for further development.
+	Following code is written in HTML , CSS , Javascript , Javascript swfobject library & JWPlayer.
+	This file is saved as <filename>.hta (Microsoft (R) HTML Application host)
+	This application is used to play IP streamed radio channels (currently list of Indian streaming channels is created). 
+	Search on internet for URLs of IP streaming radio to add more channels in this list.
+	
+	I would like to hear from you, like what changes you are doing with this application. 
+	Your new innovations are welcome , please email me at enishant@gmail.com
+	-->
+	<title>IP Radio Streamer , INDIA</title>
+	  <hta:application id="oHTA" 
+									version="1.0" 
+									applicationname="Online Radio , INDIA" 
+									border="thin" 
+									borderstyle="normal"
+									caption="yes" 
+									contextmenu="no" 
+									icon="" 
+									innerborder="yes" 
+									maximizebutton="no"
+									minimizebutton="yes" 
+									navigable="no" 
+									scroll="no" 
+									scrollflat="yes" 
+									selection="no"
+									showintaskbar="yes" 
+									singleinstance="yes" 
+									sysmenu="no" 
+									windowstate="normal" />
+		<script type="text/javascript" src="http://www.featureblend.com/flash_detect_1-0-4/flash_detect.js"></script>
+		<script type="text/javascript" src="http://www.shoutcheap.com/flashplayer/skins/swfobject.js"></script>
+		<script type="text/javascript">
+		window.moveTo(500,250);
+		window.resizeTo(250,320);
+		</script>
+		<style type="text/css">
+			body {
+				background-color:#444444;
+				color:#FFFFFF;
+				padding:0px;
+				margin:0px auto;
+				width:240px;
+			}
+			
+			hr {
+				color:lime;
+			}
+			
+			#container {
+			margin-top:-30px;
+			}
+			
+			#content {
+			height:240px;
+			width:240px;
+			padding:5px;
+			display:block;
+			}
+			
+			#content a{
+			color:skyblue;
+			text-decoration:none;
+			}
+
+			#content a:visited{
+			color:skyblue;
+			}
+			
+			#content a:hover{
+			color:lime;
+			}
+			
+			#menu {
+				padding:0px;
+				margin:0px auto;
+				width:240px;
+				text-align:center;
+			}
+	</style>
+</head>
+<body>
+<div id="container"></div>
+<div id="content"></div>
+<div id="menu">
+	<span style="cursor:pointer;" OnClick="loadContent(about)">About</span> | 
+	<span style="cursor:pointer;" OnClick="loadContent(playlist)">Playlist</span> | 
+	<span style="cursor:pointer;" OnClick="loadContent(help)">Help</span> | 
+	<span style="cursor:pointer;" OnClick="switchOff()">Switch Off</span>
+</div>
+
+<div id="about" style="display:none;">
+	<strong>ABOUT</strong>
+	<hr />
+	<strong>IP Radio Streamer</strong>
+	<br />
+	Created on: <br />10 February 2013, 17:25 PM IST
+	<br />	<br />
+	Last changes: <br />13 March 2013, 02:04 AM IST
+	<br />	<br />
+	Author: Nishant Vaity
+	<br />
+	E-mail: enishant@gmail.com
+	<hr />
+</div>
+
+<div id="playlist" style="display:none;">
+	<strong>Online Radio Playlist</strong>
+	<hr />
+		<span style="cursor:pointer;" Onclick="playRadio('http://208.115.222.205:9960')">Planet Radio City <!--1--></span>
+	<br />
+	<!--
+		<span style="cursor:pointer;" Onclick="playRadio('http://208.115.222.206:9998')">Planet Radio City 2</span>
+	<br />
+	-->
+		<span style="cursor:pointer;" Onclick="playRadio('http://sc3.spacialnet.com:16704')">Marathi Radio</span>
+	<br />
+		<span style="cursor:pointer;" Onclick="playRadio('http://184.168.74.213:7031')">Tharanga Marathi Hits</span>
+	<br />
+		<span style="cursor:pointer;" Onclick="playRadio('http://72.13.93.116/bbfm128k?MSWMExt=.asf')">Bombay Beats</span>
+	<br />
+		<span style="cursor:pointer;" Onclick="playRadio('http://198.154.106.102:8419')">Bollywood Evergreen</span>
+	<hr />
+</div>
+
+<div id="help" style="display:none;">
+	<strong>HELP</strong>
+	<hr />
+	Make sure that your computer system have <a href="http://get.adobe.com/flashplayer/" target="_blank">Adobe Falsh Player</a> installed & you are connected to Internet to play streamed IP Radio channels.
+	<br /><br />
+	<strong>Developers:</strong>
+	It is designed using HTML,CSS, Javascript swfobject library & JWPlayer to play IP streamed radio channels.
+	<hr />
+</div>
+<script type='text/javascript'>
+function playRadio(url)
+{
+	if(navigator.onLine){
+		if(!FlashDetect.installed){
+			alert("Flash is required ! Please install Adobe Flash Player."); 
+			loadContent(help);
+		}else{
+			var s1 = new SWFObject('http://www.shoutcheap.com/flashplayer/skins/player.swf',
+			'player',"240","50","9","#444444");
+			s1.addParam('allowfullscreen','true');
+			s1.addParam('allowscriptaccess','always')
+			s1.addParam("flashvars","skin=http://www.shoutcheap.com/flashplayer/skins/skin-name.swf&title=Live Stream&type=sound&file=" + url +  "/;stream.mp3&duration=99999&id=scplayer&autostart=true");
+			s1.write("container");
+		}
+	}
+	else
+	{
+	  alert('Internet connection not detected !');
+	  loadContent(help);
+	}
+}
+
+function switchOff()
+{
+	if(confirm("\tAre you sure about it , that you want to...\n\tSwitch Off IP Radio Streamer ?"))
+	{
+		window.close();
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function loadContent(ID)
+{
+	content.innerHTML=ID.innerHTML;
+}
+
+loadContent(about);
+playRadio('http://sc3.spacialnet.com:16704');
+</script>
+</body>
+</html>
